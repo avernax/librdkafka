@@ -18,6 +18,7 @@ if [[ -z $ZK_ADDRESS ]]; then
 fi
 
 set -e
+set -o pipefail  # to have 'run-test.sh | tee' fail if run-test.sh fails.
 
 ARGS=
 while [[ $1 == -* ]]; do
@@ -40,7 +41,7 @@ if [[ $modes != gdb ]]; then
     ARGS="-p1 $ARGS"
 fi
 
-LOGFILE="_until_fail_$$.log"
+LOG_FILE="_until_fail_$$.log"
 
 iter=0
 while true ; do
